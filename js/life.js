@@ -58,14 +58,6 @@
             fullscreen: true
         });
 		
-        // countdown setup start
-        $("#countdown").countdown({
-            date: "30 October 2016 12:00:00", // countdown target date settings
-            format: "on"
-        }, function() {
-            // callback function
-        });
-		
         // magnificPopup
         $('.popup-photo').magnificPopup({
             type: 'image',
