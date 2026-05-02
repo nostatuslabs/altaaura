@@ -8,9 +8,11 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  max-width: 100%;
   min-height: 260px;
-  padding: 16px 12px 28px;
+  padding: 16px max(12px, env(safe-area-inset-right)) 28px max(12px, env(safe-area-inset-left));
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .photos-section--3d .card-3d-stage {
@@ -74,12 +76,15 @@
   backface-visibility: hidden;
 }
 
-.card-3d:hover {
-  animation-play-state: paused !important;
-}
+/* Pause on hover only for devices that actually hover (not most phones) */
+@media (hover: hover) and (pointer: fine) {
+  .card-3d:hover {
+    animation-play-state: paused !important;
+  }
 
-.card-3d:hover div {
-  animation-play-state: paused !important;
+  .card-3d:hover div {
+    animation-play-state: paused !important;
+  }
 }
 
 .card-3d div:nth-child(1) {
@@ -142,13 +147,76 @@
   background-image: url("../img/5.jpg");
 }
 
+/* Tablets + large phones: shrink ring so it fits narrow viewports */
+@media only screen and (max-width: 768px) {
+  .photos-section--3d {
+    min-height: 220px;
+    padding-top: max(12px, env(safe-area-inset-top));
+  }
+
+  .photos-section--3d .card-3d-stage {
+    transform: scale(0.92);
+    max-width: 100%;
+  }
+
+  .card-3d {
+    width: min(360px, calc(100vw - 48px));
+    height: 180px;
+  }
+
+  .card-3d div {
+    width: 70px;
+    height: 98px;
+  }
+
+  .card-3d div:nth-child(1) {
+    transform: translate(-50%, -50%) rotateY(0deg) translateZ(125px);
+  }
+
+  .card-3d div:nth-child(2) {
+    transform: translate(-50%, -50%) rotateY(36deg) translateZ(125px);
+  }
+
+  .card-3d div:nth-child(3) {
+    transform: translate(-50%, -50%) rotateY(72deg) translateZ(125px);
+  }
+
+  .card-3d div:nth-child(4) {
+    transform: translate(-50%, -50%) rotateY(108deg) translateZ(125px);
+  }
+
+  .card-3d div:nth-child(5) {
+    transform: translate(-50%, -50%) rotateY(144deg) translateZ(125px);
+  }
+
+  .card-3d div:nth-child(6) {
+    transform: translate(-50%, -50%) rotateY(180deg) translateZ(125px);
+  }
+
+  .card-3d div:nth-child(7) {
+    transform: translate(-50%, -50%) rotateY(216deg) translateZ(125px);
+  }
+
+  .card-3d div:nth-child(8) {
+    transform: translate(-50%, -50%) rotateY(252deg) translateZ(125px);
+  }
+
+  .card-3d div:nth-child(9) {
+    transform: translate(-50%, -50%) rotateY(288deg) translateZ(125px);
+  }
+
+  .card-3d div:nth-child(10) {
+    transform: translate(-50%, -50%) rotateY(324deg) translateZ(125px);
+  }
+}
+
 @media only screen and (max-width: 480px) {
   .photos-section--3d .card-3d-stage {
     transform: scale(0.88);
   }
 
   .card-3d {
-    width: 320px;
+    width: min(320px, calc(100vw - 32px));
     height: 160px;
   }
 
@@ -195,5 +263,27 @@
 
   .card-3d div:nth-child(10) {
     transform: translate(-50%, -50%) rotateY(324deg) translateZ(120px);
+  }
+}
+
+/* Very narrow phones */
+@media only screen and (max-width: 360px) {
+  .photos-section--3d .card-3d-stage {
+    transform: scale(0.82);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-3d,
+  .card-3d div {
+    animation: none !important;
+  }
+
+  .card-3d {
+    transform: perspective(800px) rotateY(-18deg);
+  }
+
+  .card-3d div {
+    filter: brightness(1) !important;
   }
 }
