@@ -1,0 +1,58 @@
+/* Phase 2: iPhone X+ safe areas — edge chrome (loads after style-dark.css) */
+
+.launch-time {
+  right: calc(66px + env(safe-area-inset-right, 0px));
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+}
+
+.launch-social {
+  right: calc(20px + env(safe-area-inset-right, 0px));
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+}
+
+.launch-time-mobile {
+  top: calc(15px + env(safe-area-inset-top, 0px));
+  right: calc(15px + env(safe-area-inset-right, 0px));
+}
+
+.page-closer {
+  top: calc(20px + env(safe-area-inset-top, 0px));
+  right: calc(20px + env(safe-area-inset-right, 0px));
+}
+
+.page-closer-mobile {
+  top: calc(15px + env(safe-area-inset-top, 0px));
+  right: calc(15px + env(safe-area-inset-right, 0px));
+}
+
+.fireOT-inner {
+  /* Let insets define the box; theme also sets width/height calc — drop those to avoid conflict */
+  width: auto;
+  height: auto;
+  top: calc(30px + env(safe-area-inset-top, 0px));
+  left: calc(30px + env(safe-area-inset-left, 0px));
+  right: calc(30px + env(safe-area-inset-right, 0px));
+  bottom: calc(30px + env(safe-area-inset-bottom, 0px));
+}
+
+@media only screen and (max-width: 640px) {
+  .fireOT-inner {
+    top: env(safe-area-inset-top, 0px);
+    left: env(safe-area-inset-left, 0px);
+    right: env(safe-area-inset-right, 0px);
+    bottom: env(safe-area-inset-bottom, 0px);
+  }
+}
+
+/* Phase 4: reduce Safari iOS gaps when URL bar shows/hides (100vh fallback, then dvh) */
+html,
+body {
+  min-height: 100vh;
+}
+
+@supports (min-height: 100dvh) {
+  html,
+  body {
+    min-height: 100dvh;
+  }
+}

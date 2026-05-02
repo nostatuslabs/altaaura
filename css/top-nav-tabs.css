@@ -17,12 +17,20 @@
   left: auto !important;
   bottom: auto !important;
   width: auto !important;
+  /* Cannot extend past viewport left / left safe area (narrow phones + large right offset) */
+  max-width: max(
+    0px,
+    calc(
+      100vw - env(safe-area-inset-left, 0px) - max(110px, calc(env(safe-area-inset-right, 0px) + 92px))
+    )
+  ) !important;
   height: auto !important;
   margin: 0 !important;
   z-index: 1020 !important;
   overflow: visible !important;
   visibility: visible !important;
   background: none !important;
+  box-sizing: border-box !important;
 }
 
 #main-menu {
@@ -50,6 +58,8 @@
   align-items: center;
   justify-content: flex-end;
   width: auto !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
   height: auto !important;
 }
 
@@ -58,6 +68,8 @@
   align-items: center;
   justify-content: flex-end;
   width: auto !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
   height: auto !important;
   vertical-align: unset !important;
 }
@@ -70,9 +82,11 @@
   align-items: center;
   gap: 0.35rem 1.25rem;
   width: auto !important;
-  max-width: min(320px, 88vw);
+  max-width: min(320px, 100%) !important;
+  min-width: 0 !important;
   margin: 0 !important;
   padding: 0 0.75rem 0 0 !important;
+  box-sizing: border-box !important;
 }
 
 #main-menu ul.brackets > li {
